@@ -1,0 +1,10 @@
+#除外するディレクトリ
+/document/
+/print/
+
+#除外するファイル
+*.fls
+*.aux
+*.idx
+*.pdf
+*.DS_Store
