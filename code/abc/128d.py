@@ -2,39 +2,24 @@ N , K = map(int,input().split())
 D = list(map(int,input().split()))
 
 maxValue = 0
-actList = [0]*K
 
-for i in range(4**K):
-    act = i
-    valList = []
-    V = D.copy()
+for i in range(min(N,K)+1):
+    for j in range(min(N,K)-i+1):
+        left = D[:i]
+        right = D[N-j:]
+        merge = (left + right + [0])
+        merge.sort()
 
-    for j in range(K):
-        actList[j] = (act % 4)
-        act = int(act / 4)
+        index = 0
 
-    for j in actList:
-        if(j == 0): # 操作 A
-            if(len(V) == 0):
-                continue
-            valList.append(V.pop(0))
-        elif(j == 1): # B
-            if(len(V) == 0):
-                continue
-            valList.append(V.pop())
-        elif(j == 2): # C
-            if(len(valList) == 0):
-                continue
-            V.insert(0,valList.pop(0))
-        elif(j == 3): # D
-            if(len(valList) == 0):
-                continue
-            V.append(valList.pop(0))
-        valList.sort()
+        for k in range(K-i-j):
+            if (merge[index] < 0):
+                index += 1
+            else:
+                break
 
-    val = sum(valList)
-    if maxValue < val:
-        maxValue = val
+        val = sum(merge[index:])
+        if(maxValue < val):
+            maxValue = val
 
 print(maxValue)
-
