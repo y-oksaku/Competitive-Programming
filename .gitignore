@@ -1,6 +1,7 @@
 #除外するディレクトリ
 /document/
 /print/
+/.vscode/
 
 #除外するファイル
 *.fls

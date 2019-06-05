@@ -6,6 +6,7 @@
 #include <math.h>
 #include <iomanip>
 typedef unsigned int uint;
+typedef long long llong;
 using namespace std;
 
 int main(void) {
