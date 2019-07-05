@@ -1,22 +1,34 @@
-#include <iostream>
-#include <vector>
 #include <map>
-#include <string>
+#include <set>
+#include <vector>
 #include <algorithm>
-#include <math.h>
+#include <iostream>
+
+#include <bitset>
+#include <cassert>
+#include <queue>
+#include <random>
+#include <stack>
 #include <iomanip>
-typedef unsigned int uint;
-typedef long long llong;
+
 using namespace std;
 
+#define rep(i, n) for (long long i = 0; i < (long long)n; i++)
+#define repf(i, a, b) for (long long i = (long long)a; i < (long long)b; i++)
+#define repr(i, a, b) for (long long i = (long long)a; i > (long long)b; i--)
+
+typedef unsigned int uint;
+typedef long long llong;
+typedef unsigned long long ullong;
+typedef long double ldouble;
+
+typedef vector<llong> vecllong;
+typedef vector<vecllong> vvecllong;
+
+const llong MOD = 1e9 + 7;
+const llong INF = 1e17;
+
 int main(void) {
-    cin.tie(0); // cin高速化
-    int i,j,k = 0;
-
-    string s;
-    cin >> s;
-
-    cout << s;
 
     return 0;
 }
