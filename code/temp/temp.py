@@ -12,3 +12,6 @@ def permutation(n,r) :
 
 def combination(n,r) :
     return fact[n] // fact[n-r] // fact[r]
+
+def ceil(a,b) :
+    return (a + b - 1) // b
