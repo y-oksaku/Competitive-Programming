@@ -1,42 +1,39 @@
-import numpy as np
+from heapq import heappop , heappush
 
-x , y , z , k = map(int,input().split())
+X , Y , Z , K = map(int,input().split())
 
 A = list(map(int,input().split()))
 B = list(map(int,input().split()))
 C = list(map(int,input().split()))
 
+# それぞれソート
 A.sort(reverse=True)
 B.sort(reverse=True)
 C.sort(reverse=True)
 
-checked = np.zeros((x+1,y+1,z+1))
+# 処理済みフラグ
+confilm = []
 
-print(checked)
+q = [(-(A[0] + B[0] + C[0]) , 0,0,0)]
 
-q = [(0 , 0 , 0 , A[0] + B[0] + C[0])]
-checked[0][0][0] = 1
-value = lambda X : X[3]
+for _ in range(K) :
+    val , i , j , k = heappop(q)
 
-for _ in range(k) :
-    now = q.pop()
-    print(now[3])
+    print(-val)
 
-    a = now[0]
-    b = now[1]
-    c = now[2]
+    t = (i+1,j,k)
+    if i + 1 < X and not t in confilm :
+        heappush(q,(-(A[i+1] + B[j] + C[k]),) + t)
+        confilm.append(t)
 
-    if a < x - 1 :
-        if checked[a+1][b][c] == 0 :
-            q.append((a+1 , b , c , A[a+1] + B[b] + C[c]))
-            checked[a+1][b][c] = 1
-    if b < y - 1 :
-        if checked[a][b+1][c] == 0 :
-            q.append((a , b+1 , c , A[a] + B[b+1] + C[c]))
-            checked[a][b+1][c] = 1
-    if c < z - 1 :
-        if checked[a][b][c+1] == 0 :
-            q.append((a , b , c+1 , A[a] + B[b] + C[c+1]))
-            checked[a][b][c+1] = 1
+    t = (i,j+1,k)
+    if j + 1 < Y and not t in confilm :
+        heappush(q,(-(A[i] + B[j+1] + C[k]),) + t)
+        confilm.append(t)
 
-    q.sort(key=value)
+    t = (i,j,k+1)
+    if k + 1 < Z and not t in confilm :
+        heappush(q,(-(A[i] + B[j] + C[k+1]),) + t)
+        confilm.append(t)
+
+
