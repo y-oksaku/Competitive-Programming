@@ -1,6 +1,7 @@
 #除外するディレクトリ
 /document/
 /print/
+/work/
 /.vscode/
 
 #除外するファイル
