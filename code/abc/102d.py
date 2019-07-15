@@ -1,25 +1,51 @@
+N = int(input())
+A = list(map(int, input().split()))
 
-L = int(input())
+S = [0] * (N+1)
+for i in range(N) :
+    S[i+1] = S[i] + A[i]
 
-digit = L.bit_length()  # 必要なビット数(頂点数)
+leftMiddle = 0
+rightMiddle = 2
 
-if 2**digit > L :
-    digit -= 1
+ans = float('inf')
 
-ans = []
-for i in range(1, digit+1) :
-    ans.append([i, i+1, 0])
-    ans.append([i, i+1, 2**(i-1)])
+for middle in range(2, N-1) :  # C|D
+    leftS = S[leftMiddle]
+    rightS = S[middle] - leftS
+    diff = abs(leftS - rightS)
 
-L = L - 2**digit  # 残り本数
+    # 左側の更新
+    for i in range(leftMiddle, middle) :  # B|C
+        leftS += A[i]
+        rightS -= A[i]
+        if diff > abs(leftS - rightS) :
+            leftMiddle += 1
+            diff = abs(leftS - rightS)
+        else :
+            break
 
-tmp = 0
-for i in range(digit, 0, -1) :
-    if L - 2**(i - 1) >= 0 :
-        ans.append([i, digit+1, 2**digit + tmp])
-        L -= 2**(i - 1)
-        tmp += 2**(i - 1)
+    leftS = S[rightMiddle] - S[middle]
+    rightS = S[-1] - S[rightMiddle]
+    diff = abs(leftS - rightS)
 
-print(digit+1, len(ans))
-for a in ans :
-    print(*a)
+    # 右側の更新
+    for i in range(rightMiddle, N) :  # D|E
+        leftS += A[i]
+        rightS -= A[i]
+        if diff > abs(leftS - rightS) :
+            rightMiddle += 1
+            diff = abs(leftS - rightS)
+        else :
+            break
+
+    B = S[leftMiddle]
+    C = S[middle] - B
+    D = S[rightMiddle] - S[middle]
+    E = S[-1] - B - C - D
+
+    diff = max(B, C, D, E) - min(B, C, D, E)
+    ans = min(ans, diff)
+
+print(ans)
+
