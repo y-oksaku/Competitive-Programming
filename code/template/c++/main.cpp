@@ -28,6 +28,9 @@ const llong INF = 1e17;
 #define FORR(i, n) for (llong i = n; i > 0; i++)
 
 int main(void) {
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
     llong N;
     cin >> N;
 
