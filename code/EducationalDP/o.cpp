@@ -29,40 +29,43 @@ const llong INF = 1e17;
 #define FORS(i, a, b) for (llong i = a; i < b; i++)
 #define FORR(i, n) for (llong i = n; i > 0; i++)
 
-llong N, K;
-vvecllong memo(0, vecllong(0, -1));
-vecllong A(0, -1);
+vecllong memo(0);
+llong N;
+bool A[22][22] = {false};
 
-llong search(llong child, llong candy) {
-    if(candy == 0) return 1;
-    if(candy < 0) return 0;
-    if(child == -1) return 0;
-    if(memo[child][candy] != -1) return memo[child][candy];
+llong search(llong state, llong man) {
+    if(memo[state] != -1) {
+        return memo[state];
+    }
 
     llong ret = 0;
-    ret = (search(child - 1, candy) + search(child, candy - 1)) % MOD;
-    ret = (ret - search(child - 1, candy - A[child] - 1)) % MOD;
-    if(ret < 0) {
-        ret += MOD;
+    FOR(woman, N) {
+        if((state & (1 << woman)) != 0 and A[man][woman]) {
+            ret = (ret + search(state - (1 << woman), man + 1)) % MOD;
+        }
     }
-    memo[child][candy] = ret % MOD;
-    return memo[child][candy];
+    memo[state] = ret % MOD;
+    return memo[state];
 };
 
 int main(void) {
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    cin >> N >> K;
-
-    memo.resize(N + 1, vecllong(K + 1, -1));
-    A.resize(N, -1);
-
+    cin >> N;
     FOR(i, N) {
-        cin >> A[i];
+        FOR(j, N) {
+            llong in;
+            cin >> in;
+            A[i][j] = (in == 1);
+        }
     }
 
-    llong ans = search(N - 1, K) % MOD;
+    memo.resize((1 << N), -1);
+    memo[0] = 1;
+
+    llong ans = search((1 << N) - 1, 0) % MOD;
+
     cout << ans << endl;
 
     return 0;
