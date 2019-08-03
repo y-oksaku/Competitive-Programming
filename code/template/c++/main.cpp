@@ -28,6 +28,8 @@ const llong INF = 1e17;
 #define FOR(i, n) for (llong i = 0; i < n; i++)
 #define FORS(i, a, b) for (llong i = a; i < b; i++)
 #define FORR(i, n) for (llong i = n; i > 0; i++)
+#define asc less<llong>()
+#define desc greater<llong>()
 
 llong ctoi(char c) {
     switch (c) {
