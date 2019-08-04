@@ -1,24 +1,25 @@
-H , W = map(int,input().split())
-N = int(input())
+N, C = map(int, input().split())
 
-A = list(map(int,input().split()))
+channels = [[] for _ in range(C)]
+maxT = 0
 
-ans = [0] * (H * W)
+for _ in range(N) :
+    s, t, c = map(int, input().split())
+    maxT = max(maxT, t)
+    channels[c - 1].append((s, t))
 
-index = 0
+maxT = maxT * 2 + 10
+tvSum = [0 for _ in range(maxT)]
 
-for color , a in enumerate(A) :
-    for _ in range(a) :
-        ans[index] = color + 1
-        index += 1
+for tv in channels :
+    imos = [0 for _ in range(maxT)]
+    for (s, t) in tv :
+        imos[s * 2 - 1] += 1
+        imos[t * 2] -= 1
+    for i in range(1, maxT) :
+        imos[i] += imos[i - 1]
+    for i in range(maxT) :
+        if imos[i] > 0 :
+            tvSum[i] += 1
 
-for i in range(H) :
-    sub = ans[i * W : (i + 1) * W]
-    if i % 2 == 0 :
-        for j in range(W) :
-            print('{} '.format(sub[j]), end='')
-    else :
-        sub.reverse()
-        for j in range(W) :
-            print('{} '.format(sub[j]), end='')
-    print('')
+print(max(tvSum))
