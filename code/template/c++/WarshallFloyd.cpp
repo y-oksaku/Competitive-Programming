@@ -45,9 +45,9 @@ vvecllong WarshallFloyd(vector<vector<edge>> edges) {
         });
     }
 
-    FOR(i, N) {
-        FOR(j, N) {
-            FOR(k, N) {
+    FOR(k, N) {
+        FOR(i, N) {
+            FOR(j, N) {
                 chmin(minDist[i][j], minDist[i][k] + minDist[k][j]);
             }
         }
