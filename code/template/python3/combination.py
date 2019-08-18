@@ -16,7 +16,19 @@ class Combination:
             return 0
         return self.fact[n] * self.factInv[n - r] % self.mod
 
+    def nprWithoutMod(self, n, r):
+        if n < r or n < 0 or r < 0:
+            return 0
+        return self.fact[n] // self.fact[n - r]
+
     def ncr(self, n, r):
         if n < r or n < 0 or r < 0:
             return 0
         return self.fact[n] * (self.factInv[r] * self.factInv[n - r] % self.mod) % self.mod
+
+    def ncrWithoutMod(self, n, r):
+        if n < r or n < 0 or r < 0:
+            return 0
+        if n == r:
+            return 1
+        return self.fact[n] // self.fact[r] // self.factInv[n - r]
