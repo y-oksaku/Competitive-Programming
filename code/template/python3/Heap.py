@@ -19,3 +19,5 @@ class Heapq:
     def top(self):
         return self.__que[0] * self.__sign
 
+    def size(self):
+        return len(self.__que)
