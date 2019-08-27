@@ -3,8 +3,8 @@ class Combination:
         self.size = size + 2
         self.mod = mod
         self.fact = [1, 1] + [0] * size
-        self.inv = [1, 1] + [0] * size
-        self.factInv = [0, 1] + [0] * size
+        self.factInv = [1, 1] + [0] * size
+        self.inv = [0, 1] + [0] * size
 
         for i in range(2, self.size):
             self.fact[i] = self.fact[i - 1] * i % self.mod
@@ -24,13 +24,9 @@ class Combination:
     def ncr(self, n, r):
         if n < r or n < 0 or r < 0:
             return 0
-        if n == r or r == 0:
-            return 1
         return self.fact[n] * (self.factInv[r] * self.factInv[n - r] % self.mod) % self.mod
 
     def ncrWithoutMod(self, n, r):
         if n < r or n < 0 or r < 0:
             return 0
-        if n == r or r == 0:
-            return 1
         return self.fact[n] // self.fact[r] // self.factInv[n - r]
