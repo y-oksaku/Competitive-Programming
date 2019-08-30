@@ -1,3 +1,5 @@
+# modなしの場合は，mod=1にする
+
 class Combination:
     def __init__(self, size, mod=10**9 + 7):
         self.size = size + 2
@@ -16,17 +18,12 @@ class Combination:
             return 0
         return self.fact[n] * self.factInv[n - r] % self.mod
 
-    def nprWithoutMod(self, n, r):
-        if n < r or n < 0 or r < 0:
-            return 0
-        return self.fact[n] // self.fact[n - r]
-
     def ncr(self, n, r):
         if n < r or n < 0 or r < 0:
             return 0
         return self.fact[n] * (self.factInv[r] * self.factInv[n - r] % self.mod) % self.mod
 
-    def ncrWithoutMod(self, n, r):
-        if n < r or n < 0 or r < 0:
+    def factN(self, n):
+        if n < 0:
             return 0
-        return self.fact[n] // self.fact[r] // self.factInv[n - r]
+        return self.fact[n]
