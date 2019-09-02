@@ -1,0 +1,1 @@
+print('BWOAWNWWOAWN'[input()=='2'::2])
