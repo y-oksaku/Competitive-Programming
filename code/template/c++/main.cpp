@@ -41,6 +41,8 @@ const llong INF = 1e17;
 #define FOR(i, n) for (llong i = 0; i < n; i++)
 #define FORS(i, a, b) for (llong i = a; i < b; i++)
 #define FORR(i, n) for (llong i = n; i > 0; i++)
+#define sup(vec, a) upper_bound(vec.begin(), vec.end(), a) - vec.begin()
+#define inf(vec, a) lower_bound(vec.begin(), vec.end(), a) - vec.begin()
 
 int main(void) {
     cin.tie(0);
