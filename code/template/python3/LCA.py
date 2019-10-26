@@ -6,23 +6,26 @@ class LCA:
         self.level = (size - 1).bit_length()
         self.edges = [[] for _ in range(size)]
         self.depth = [0] * size
+        self.length = [0] * size
         self.prev = [None] * size
         self.kprev = None
 
     def addEdge(self, fr, to, cost=1):
-        self.edges[fr].append(to)
-        self.edges[to].append(fr)
+        self.edges[fr].append((to, cost))
+        self.edges[to].append((fr, cost))
 
     def dfs(self):
         st = deque([(0, 0)])
         self.depth[0] = 0
+        self.length[0] = 0
         while st:
             now, prev = st.pop()
-            for to in self.edges[now]:
+            for to, cost in self.edges[now]:
                 if to == prev:
                     continue
                 st.append((to, now))
                 self.depth[to] = self.depth[now] + 1
+                self.length[to] = self.length[now] + cost
                 self.prev[to] = now
 
     def construct(self):
@@ -63,4 +66,4 @@ class LCA:
         return self.kprev[0][u]
 
     def dist(self, u, v):
-        return self.depth[u] + self.depth[v] - self.depth[self.lca(u, v)] * 2
+        return self.length[u] + self.length[v] - self.length[self.lca(u, v)] * 2
