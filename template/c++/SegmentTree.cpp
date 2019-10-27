@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 typedef long long llong;
-typedef vector<llong> vecllong;
+typedef vector<llong> llongV;
 
 const llong MOD = 1e9 + 7;
 const llong INF = 1e17;
@@ -10,9 +10,10 @@ const llong INF = 1e17;
 #define FORS(i, a, b) for (llong i = a; i < b; i++)
 #define FORR(i, n) for (llong i = n; i > 0; i++)
 
+// 0-indexed, [l, r)
 class SegmentTree {
     public :
-        vecllong __data;
+        llongV __data;
         llong __size;
 
         SegmentTree (llong size) {
