@@ -1,2 +1,2 @@
-# AtCoder
-AtCoderの解いたコード置き場です．
+# Competitive Programming
+解いたコード置き場です．
