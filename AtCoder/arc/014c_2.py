@@ -1,0 +1,1 @@
+s=open(0).read();print(sum((s.count(c)%2 for c in 'RGB')))
