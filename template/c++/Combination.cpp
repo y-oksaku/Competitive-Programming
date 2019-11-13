@@ -1,35 +1,27 @@
 #include <vector>
 
 using namespace std;
-typedef long long llong;
-typedef vector<llong> vecllong;
 
-const llong MOD = 1e9 + 7;
-const llong INF = 1e17;
-
-#define FOR(i, n) for (llong i = 0; i < n; i++)
-#define FORS(i, a, b) for (llong i = a; i < b; i++)
-#define FORR(i, n) for (llong i = n; i > 0; i++)
-
+template<class T = long long>
 class Combination {
     private:
-        llong size;
-        llong mod;
-        vecllong fact;
-        vecllong factInv;
-        vecllong inv;
+        T size;
+        T mod;
+        vector<T> fact;
+        vector<T> factInv;
+        vector<T> inv;
 
     public:
-        Combination (llong size, llong mod) {
+        Combination (T size, T mod = 1000000007) {
             this->init(size, mod);
         };
 
-        void init(llong size, llong mod) {
+        void init(T size, T mod) {
             this->size = size + 2;
             this->mod = mod;
-            this->fact = vecllong(size, 0);
-            this->factInv = vecllong(size, 0);
-            this->inv = vecllong(size, 0);
+            this->fact = vector<T>(this->size, 0);
+            this->factInv = vector<T>(this->size, 0);
+            this->inv = vector<T>(this->size, 0);
 
             // 初期値
             this->fact[0] = 1;
@@ -39,19 +31,19 @@ class Combination {
             this->inv[0] = 0;
             this->inv[1] = 1;
 
-            FORS(i, 2, this->size) {
+            for(T i = 2; i < this->size; i++) {
                 this->fact[i] = this->fact[i - 1] * i % mod;
                 this->inv[i] = (mod - this->inv[mod % i] * (mod / i) % mod) % mod;
                 this->factInv[i] = this->factInv[i - 1] * this->inv[i] % mod;
             }
         };
 
-        llong npr(llong n, llong r) {
+        T npr(T n, T r) {
             if (n < r || n < 0 || r < 0) return 0;
             return this->fact[n] * this->factInv[n - r] % this->mod;
         };
 
-        llong ncr(llong n, llong r) {
+        T ncr(T n, T r) {
             if (n < r || n < 0 || r < 0) return 0;
             return this->fact[n] * (this->factInv[r] * this->factInv[n - r] % this->mod) % this->mod;
         };

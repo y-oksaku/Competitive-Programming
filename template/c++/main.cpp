@@ -9,18 +9,19 @@
 #include <random>
 #include <stack>
 #include <iomanip>
+#include <functional>
 
 using namespace std;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
 
-template <typename A, typename B>
+template <class A, class B>
 string to_string(pair<A, B> p);
 
-template <typename A, typename B, typename C>
+template <class A, class B, class C>
 string to_string(tuple<A, B, C> p);
 
-template <typename A, typename B, typename C, typename D>
+template <class A, class B, class C, class D>
 string to_string(tuple<A, B, C, D> p);
 
 string to_string(const string& s) {
@@ -58,7 +59,7 @@ string to_string(bitset<N> v) {
     return res;
 }
 
-template <typename A>
+template <class A>
 string to_string(A v) {
     bool first = true;
     string res = "{";
@@ -73,24 +74,24 @@ string to_string(A v) {
     return res;
 }
 
-template <typename A, typename B>
+template <class A, class B>
 string to_string(pair<A, B> p) {
     return "(" + to_string(p.first) + ", " + to_string(p.second) + ")";
 }
 
-template <typename A, typename B, typename C>
+template <class A, class B, class C>
 string to_string(tuple<A, B, C> p) {
     return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ")";
 }
 
-template <typename A, typename B, typename C, typename D>
+template <class A, class B, class C, class D>
 string to_string(tuple<A, B, C, D> p) {
     return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ")";
 }
 
 void debug_out() { cerr << endl; }
 
-template <typename Head, typename... Tail>
+template <class Head, class... Tail>
 void debug_out(Head H, Tail... T) {
     cerr << " " << to_string(H);
     debug_out(T...);
@@ -109,36 +110,25 @@ using ldouble = long double;
 using intV = vector<int>;
 using llongV = vector<long long>;
 using llongVV = vector<vector<long long>>;
-using Graph = vector<vector<long long>>;
-using costGraph = vector<vector<pair<long long, long long>>>;
 
-struct Edge {
-    long long from;
-    long long to;
-    long long cost;
-};
+template<class T = int>
+using asc_pque = priority_queue<T, vector<T>, greater<T>>;
+template<class T = int>
+using desc_pque = priority_queue<T, vector<T>, less<T>>;
 
-template<typename T>
-using asc = less<T>();
-template<typename T>
-using desc = greater<T>();
-
-const llong MOD = 1e9 + 7;
-const llong INF = 1e17;
+const llong MOD = 1000000007;
+const int IINF = 1000000000;
+const llong LINF = 100000000000000000LL;
 
 #define FOR(i, n) for (llong i = 0LL; i < llong(n); i++)
 #define FORS(i, a, b) for (llong i = llong(a); i < llong(b); i++)
 #define sup(vec, a) upper_bound(vec.begin(), vec.end(), a) - vec.begin()
 #define inf(vec, a) lower_bound(vec.begin(), vec.end(), a) - vec.begin()
+#define GET(i, T) get<i>(T)
 
 int main(void) {
     cin.tie(0);
     ios::sync_with_stdio(false);
-
-    llong N;
-    cin >> N;
-
-    debug(N);
 
     return 0;
 }
