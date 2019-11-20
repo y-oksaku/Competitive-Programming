@@ -1,5 +1,4 @@
 #include <vector>
-#include <functional>
 using namespace std;
 
 // 0-indexed, [l, r)
@@ -9,9 +8,8 @@ class MinSegmentTree {
         vector<T> __data;
         T __size;
         T INF;
-        function<T(T, T)> cmpFunc;
 
-        SegmentTree (T size, T INF) {
+        MinSegmentTree (T size, T INF) {
             this->init(size, INF);
         };
 
