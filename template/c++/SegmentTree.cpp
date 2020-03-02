@@ -1,5 +1,4 @@
 #include <vector>
-#include <functional>
 using namespace std;
 
 // 0-indexed, [l, r)
@@ -9,13 +8,12 @@ class SegmentTree {
         vector<T> __data;
         T __size;
         T initValue;
-        function<T(T, T)> cmpFunc;
 
-        SegmentTree (T size, T initValue = 10000000000, function<T(T, T)> cmpFunc = [](T l, T r){return min(l, r);}) {
-            this->init(size, initValue, cmpFunc);
+        SegmentTree (T size, T initValue = 10000000000) {
+            this->init(size, initValue);
         };
 
-        void init (T size, T initValue, function<T(T, T)> cmpFunc) {
+        void init (T size, T initValue) {
             // 完全二分木にする
             T binSize = 0;
             while((1 << binSize) < size) {
@@ -23,13 +21,16 @@ class SegmentTree {
             }
             this->__size = (1 << binSize);
             this->initValue = initValue;
-            this->cmpFunc = cmpFunc;
 
             this->__data.resize(this->__size * 2);
             for(T i = 0; i < this->__size * 2; i++) {
                 this->__data[i] = initValue;
             }
         };
+
+        T cmpFunc(T left, T right) {
+            return min(left, right);
+        }
 
         /* メソッド */
         void update(T index, T value) {
