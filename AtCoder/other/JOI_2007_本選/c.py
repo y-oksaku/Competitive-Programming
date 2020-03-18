@@ -1,19 +1,29 @@
-from itertools import product
-from bisect import bisect_right
-import sys
-input = sys.stdin.buffer.readline
+import bisect
 
-N, M = map(int, input().split())
-P = [int(input()) for _ in range(N)] + [0]
+N, M = map(int,input().split())
 
-Q = [a + b for a, b in product(P, repeat=2) if a + b <= M]
+P = [0]
+for _ in range(N) :
+    a = int(input())
+    P.append(a)
+
+Q = []
+
+for p in P :
+    for q in P :
+        Q.append(p + q)
+
+Q = list(set(Q))
 Q.sort()
-Q += [10**10]
 
 ans = 0
-for a in Q:
-    b = a + Q[bisect_right(Q, M - a) - 1]
-    if ans < b <= M:
-        ans = b
+for q in Q :
+    if q > M :
+        break
+    right = bisect.bisect_right(Q, M-q) - 1
+    if right < 0 :
+        break
+    newVal = q + Q[right]
+    ans = max(ans, newVal)
 
 print(ans)
