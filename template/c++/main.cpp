@@ -1,15 +1,4 @@
-#include <map>
-#include <set>
-#include <vector>
-#include <algorithm>
-#include <iostream>
-#include <bitset>
-#include <cassert>
-#include <queue>
-#include <random>
-#include <stack>
-#include <iomanip>
-#include <functional>
+#include <bits/stdc++.h>
 
 using namespace std;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
@@ -122,8 +111,8 @@ const llong LINF = 100000000000000000LL;
 
 #define FOR(i, n) for (llong i = 0LL; i < llong(n); i++)
 #define FORS(i, a, b) for (llong i = llong(a); i < llong(b); i++)
-#define sup(vec, a) upper_bound(vec.begin(), vec.end(), a) - vec.begin()
-#define inf(vec, a) lower_bound(vec.begin(), vec.end(), a) - vec.begin()
+#define bisect_right(vec, a) upper_bound(vec.begin(), vec.end(), a) - vec.begin()
+#define bisect_left(vec, a) lower_bound(vec.begin(), vec.end(), a) - vec.begin()
 #define GET(i, T) get<i>(T)
 
 int main(void) {
