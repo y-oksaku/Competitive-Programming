@@ -122,8 +122,8 @@ const llong LINF = 100000000000000000LL;
 
 #define FOR(i, n) for (llong i = 0LL; i < llong(n); i++)
 #define FORS(i, a, b) for (llong i = llong(a); i < llong(b); i++)
-#define sup(vec, a) upper_bound(vec.begin(), vec.end(), a) - vec.begin()
-#define inf(vec, a) lower_bound(vec.begin(), vec.end(), a) - vec.begin()
+#define sup(vec, a) bisect_right(vec.begin(), vec.end(), a) - vec.begin()
+#define inf(vec, a) bisect_left(vec.begin(), vec.end(), a) - vec.begin()
 #define GET(i, T) get<i>(T)
 
 int main(void) {
