@@ -14,10 +14,10 @@ class LCA:
         self.edges[fr].append((to, cost))
         self.edges[to].append((fr, cost))
 
-    def dfs(self):
-        st = deque([(0, 0)])
-        self.depth[0] = 0
-        self.length[0] = 0
+    def dfs(self, root):
+        st = deque([(root, root)])
+        self.depth[root] = 0
+        self.length[root] = 0
         while st:
             now, prev = st.pop()
             for to, cost in self.edges[now]:
@@ -28,8 +28,8 @@ class LCA:
                 self.length[to] = self.length[now] + cost
                 self.prev[to] = now
 
-    def construct(self):
-        self.dfs()
+    def construct(self, root=0):
+        self.dfs(root)
         kprev = [self.prev]
         S = self.prev
         for _ in range(self.level):
