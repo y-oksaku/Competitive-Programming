@@ -1,26 +1,36 @@
-N, K = map(int, input().split())
-A = list(map(int, input().split()))
+N = int(input())
+S = input()
+_ = input()
+K = list(map(int, input().split()))
 
-cumA = [0] * (N + 1)
-for i in range(1, N + 1):
-    cumA[i] = cumA[i - 1] + A[i - 1]
+def sol(k):
+    ret = 0
 
-beauty = []
-for left in range(N):
-    for right in range(left + 1, N + 1):
-        b = cumA[right] - cumA[left]
-        beauty.append(b)
+    right = 0
+    c = 0
+    m = 0
+    mc = 0
+    nx = 0
+    for left, s in enumerate(S):
+        while right < N and right - left < k:
+            if S[right] == 'M':
+                nx += 1
+            elif S[right] == 'C':
+                m += nx
+                mc += m
+                nx = 0
+                c += 1
+            right += 1
 
-ans = 0
-M = max(beauty).bit_length()
+        if s == 'D':
+            ret += mc
+        elif s == 'M':
+            mc -= c
+            m -= 1
+        elif s == 'C':
+            c -= 1
 
-for digit in range(M)[:: -1]:
-    new = ans + (1 << digit)
-    cnt = 0
-    for b in beauty:
-        if b & new == new:
-            cnt += 1
-    if cnt >= K:
-        ans = new
+    return ret
 
-print(ans)
+for k in K:
+    print(sol(k))
