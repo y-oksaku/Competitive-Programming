@@ -1,8 +1,8 @@
 import Foundation
-infix operator >>> : MultiplicationPrecedence
+infix operator >>>: MultiplicationPrecedence
 
 class Input {
-    var inputs : [String] = [];
+    var inputs: [String] = [];
 
     func read() {
         self.inputs = readLine()!.components(separatedBy: " ")
@@ -16,12 +16,24 @@ class Input {
         return self.inputs.popLast()!
     }
 
-    static func >>> (cin : Input, right : inout Int) -> (Input) {
+    static func >>> (cin: Input, right: inout Int) -> (Input) {
         right = Int(cin.pop())!
         return cin
     }
-    static func >>> (cin : Input, right : inout String) -> (Input) {
+    static func >>> (cin: Input, right: inout String) -> (Input) {
         right = cin.pop()
+        return cin
+    }
+    static func >>> (cin: Input, right: inout [Int]) -> (Input) {
+        for i in 0..<right.count {
+            right[i] = Int(cin.pop())!
+        }
+        return cin
+    }
+    static func >>> (cin: Input, right: inout [String]) -> (Input) {
+        for i in 0..<right.count {
+            right[i] = cin.pop()
+        }
         return cin
     }
 }
