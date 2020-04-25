@@ -25,19 +25,11 @@ impl Input {
 }
 
 use std::ops::Shr;
-impl Shr<&mut usize> for Input {
+impl<T: core::str::FromStr> Shr<&mut T> for Input {
     type Output = Input;
 
-    fn shr(mut self, rhs: &mut usize) -> Input {
-        *rhs = self.pop().parse::<usize>().unwrap();
-        return self;
-    }
-}
-impl Shr<&mut String> for Input {
-    type Output = Input;
-
-    fn shr(mut self, rhs: &mut String) -> Input {
-        *rhs = self.pop();
+    fn shr(mut self, rhs: &mut T) -> Input {
+        *rhs = self.pop().parse::<T>().ok().unwrap();
         return self;
     }
 }
