@@ -10,10 +10,7 @@ impl Input {
     fn read(&mut self) {
         let mut line: String = String::new();
         std::io::stdin().read_line(&mut line).unwrap();
-        self.data = line.split_whitespace()
-            .map(|String| String.parse::<String>().unwrap())
-            .collect::<Vec<_>>();
-        self.data.reverse();
+        self.data = line.split_whitespace().rev().map(|s| s.parse::<String>().unwrap()).collect::<Vec<_>>();
     }
 
     pub fn pop(&mut self) -> String {
@@ -24,8 +21,7 @@ impl Input {
     }
 }
 
-use std::ops::Shr;
-impl<T: core::str::FromStr> Shr<&mut T> for Input {
+impl<T: core::str::FromStr> std::ops::Shr<&mut T> for Input {
     type Output = Input;
 
     fn shr(mut self, rhs: &mut T) -> Input {
@@ -35,13 +31,11 @@ impl<T: core::str::FromStr> Shr<&mut T> for Input {
 }
 
 fn main() {
-    let mut cin = Input::new();
+    let cin = Input::new();
 
-    let mut a: usize = 0;
-    let mut b: usize = 0;
-    let mut c: usize = 0;
+    let (mut a, mut b, mut c) = (0, 0, 0);
     let mut s = String::new();
     cin >> &mut a >> &mut b >> &mut c >> &mut s;
 
-    println!("{} {}", a + b + c, s);
+    println!("{} {} {} {}", a, b, c, s);
 }
