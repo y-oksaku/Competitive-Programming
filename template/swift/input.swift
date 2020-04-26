@@ -1,5 +1,10 @@
 import Foundation
 infix operator >>>: MultiplicationPrecedence
+protocol Initializable {
+    init?(_ description: String)
+}
+extension Int: Initializable {}
+extension String: Initializable {}
 
 class Input {
     var inputs: [String] = [];
@@ -16,23 +21,16 @@ class Input {
         return self.inputs.popLast()!
     }
 
-    static func >>> (cin: Input, right: inout Int) -> (Input) {
-        right = Int(cin.pop())!
+    @discardableResult
+    static func >>><T: Initializable> (cin: Input, right: inout T) -> (Input) {
+        right = T.init(cin.pop())!
         return cin
     }
-    static func >>> (cin: Input, right: inout String) -> (Input) {
-        right = cin.pop()
-        return cin
-    }
-    static func >>> (cin: Input, right: inout [Int]) -> (Input) {
+
+    @discardableResult
+    static func >>><T: Initializable> (cin: Input, right: inout [T]) -> (Input) {
         for i in 0..<right.count {
-            right[i] = Int(cin.pop())!
-        }
-        return cin
-    }
-    static func >>> (cin: Input, right: inout [String]) -> (Input) {
-        for i in 0..<right.count {
-            right[i] = cin.pop()
+            right[i] = T.init(cin.pop())!
         }
         return cin
     }
