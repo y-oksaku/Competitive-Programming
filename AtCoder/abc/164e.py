@@ -29,7 +29,7 @@ while que:
         if cost < 0 or minDsit[to][cost] <= dist + d:
             continue
         minDsit[to][cost] = dist + d
-        que.append((dist + d, cost, to))
+        heappush(que, (dist + d, cost, to))
 
 for dist in minDsit[1:]:
     print(min(dist))
