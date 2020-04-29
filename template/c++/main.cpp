@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
-template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
 
 template <class A, class B>
 string to_string(pair<A, B> p);
@@ -97,6 +94,7 @@ using llong = long long;
 using Llong = unsigned long long;
 using ldouble = long double;
 using intV = vector<int>;
+using intVV = vector<vector<int>>;
 using llongV = vector<long long>;
 using llongVV = vector<vector<long long>>;
 
@@ -109,11 +107,14 @@ const llong MOD = 1000000007;
 const int IINF = 1000000000;
 const llong LINF = 100000000000000000LL;
 
+template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
+template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
+
 #define FOR(i, n) for (llong i = 0LL; i < llong(n); i++)
 #define FORS(i, a, b) for (llong i = llong(a); i < llong(b); i++)
 #define bisect_right(vec, a) upper_bound(vec.begin(), vec.end(), a) - vec.begin()
 #define bisect_left(vec, a) lower_bound(vec.begin(), vec.end(), a) - vec.begin()
-#define GET(i, T) get<i>(T)
+#define GET(i, p) get<i>(p)
 
 int main(void) {
     cin.tie(0);
