@@ -24,3 +24,15 @@ class Combination:
 
     def nhr(self, n, r):  # 重複組合せ: x_1 + ... + x_n = r
         return self.ncr(n + r - 1, n - 1)
+
+N, K = map(int, input().split())
+K = min(K, N)
+MOD = 10**9 + 7
+comb = Combination(N + 100)
+
+ans = 0
+for k in range(K + 1):
+    ans += comb.ncr(N, k) * comb.nhr(N - k, k)
+    ans %= MOD
+
+print(ans)
