@@ -1,31 +1,24 @@
 N = int(input())
-T = list(map(lambda t: int(t) * 10, input().split()))
-V = list(map(int, input().split())) + [0]
+T = list(map(int, input().split()))
+V = list(map(int, input().split()))
+M = 2
+dt = 1 / M
 R = sum(T)
 
-maxSpeed = [10**18] * (R + 1)
-maxSpeed[0] = 0
-maxSpeed[R] = 0
+maxSpeeds = [10**18] * (R * M + 1)
 now = 0
-for i, t in enumerate(T):
-    now += t
-    maxSpeed[now] = min(V[i], V[i + 1])
+for t, v in zip(T, V):
+    for i in range(t * M + 1):
+        maxSpeeds[now + i] = min(maxSpeeds[now + i], v)
+    now += t * M
 
-now = 0
-for v, t in zip(V, T):
-    for i in range(t + 1):
-        maxSpeed[now + i] = min(maxSpeed[now + i], v)
-    now += t
+maxSpeeds[0] = 0
+maxSpeeds[-1] = 0
+for t in range(1, R * M + 1):
+    maxSpeeds[t] = min(maxSpeeds[t - 1] + dt, maxSpeeds[t])
+    maxSpeeds[-(t + 1)] = min(maxSpeeds[-t] + dt, maxSpeeds[-(t + 1)])
 
-for t in range(1, R + 1):
-    maxSpeed[t] = min(maxSpeed[t], maxSpeed[t - 1] + 0.1)
-for t in range(R)[::-1]:
-    maxSpeed[t] = min(maxSpeed[t], maxSpeed[t + 1] + 0.1)
-
-base = 0
-upper = 0
-for v1, v2 in zip(maxSpeed, maxSpeed[1:]):
-    base += min(v1, v2)
-    upper += abs(v1 - v2)
-ans = base + upper / 2
-print(ans / 10)
+ans = 0
+for l, r in zip(maxSpeeds, maxSpeeds[1:]):
+    ans += (l + r) / M / 2
+print(ans)
