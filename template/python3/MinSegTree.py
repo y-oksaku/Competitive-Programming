@@ -1,4 +1,4 @@
-INF = float('inf')
+INF = 10**18
 
 class MinSegTree:
     """

@@ -3,11 +3,13 @@ class SegmentTree:
     0-indexed
     query : [L, R)
     """
-    def __init__(self, size, initValue, cmpFunc):
+    def __init__(self, size, initValue):
         self.size = 1 << (size.bit_length())  # 完全二分木にする
         self.data = [initValue] * (2 * self.size - 1)
         self.initValue = initValue
-        self.cmpFunc = cmpFunc
+
+    def cmpFunc(self, left, right):
+        return left + right
 
     def build(self, rawData):
         self.data[self.size - 1: self.size - 1 + len(rawData)] = rawData

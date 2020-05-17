@@ -16,8 +16,10 @@ class Heapq:
     def pushpop(self, value):
         return heapq.heappushpop(self.__que, value * self.__sign) * self.__sign
 
+    @property
     def top(self):
         return self.__que[0] * self.__sign
 
+    @property
     def size(self):
         return len(self.__que)

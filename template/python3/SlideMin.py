@@ -3,7 +3,7 @@ from collections import deque
 class SlideMin:
     """
     スライド最小値\n
-    各区間[ai, ai+leng]の最小値を取得する：O(n)\n
+    各区間[i, i+leng)の最小値を取得する：O(n)\n
     self.que = [(i1, v1), (i2, v2), ..., (ik, vk)]\n
     i1 < ... < ik and v1 < ... < vk
     """
@@ -28,4 +28,3 @@ class SlideMin:
 
         if self.que[0][0] == index - self.leng:
             self.que.popleft()
-

@@ -12,7 +12,7 @@ class MinCostFlow:
     def minCostFlow(self, s, t, f):
         N = self.size
         edges = self.edges
-        INF = float('inf')
+        INF = 10**18
 
         res = 0
         H = [0] * N
