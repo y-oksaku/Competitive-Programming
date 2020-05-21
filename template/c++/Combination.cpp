@@ -1,5 +1,4 @@
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 template<class T = long long>
@@ -47,4 +46,8 @@ class Combination {
             if (n < r || n < 0 || r < 0) return 0;
             return this->fact[n] * (this->factInv[r] * this->factInv[n - r] % this->mod) % this->mod;
         };
+
+        T nhr(T n, T r) {
+            return this->ncr(n + r - 1, n - 1);
+        }
 };
