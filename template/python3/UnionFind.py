@@ -36,5 +36,3 @@ class UnionFind:
 
     def sizeOfSameRoot(self, index):
         return self.size[self.root(index)]
-
-tree = UnionFind(10)
