@@ -11,9 +11,9 @@ def divisors(n):
     return divisors
 
 # 素因数分解(1回のみ)
-from collections import defaultdict
+from collections import Counter
 def primeFactorization(N):
-    primes = defaultdict(int)
+    primes = Counter()
     R = int(N**(0.5)) + 1
     for num in range(2, R):
         while N % num == 0:
@@ -25,10 +25,10 @@ def primeFactorization(N):
 
 # 素数のリスト
 def createPrimeList(N, isTable=True):
-    isPrime = [True] * N
+    isPrime = [True] * (N + 1)
     isPrime[0] = False
     isPrime[1] = False
-    for i in range(2, N):
+    for i in range(2, N + 1):
         if not isPrime[i]:
             continue
         for p in range(i * 2, N, i):
@@ -36,11 +36,11 @@ def createPrimeList(N, isTable=True):
     return isPrime if isTable else [i for i in range(2, N) if isPrime[i]]
 
 # 素因数分解(複数回)
-from collections import defaultdict
-isPrime = createPrimeList(10**5, False)
+from collections import Counter
+primeList = createPrimeList(10**5, False)
 def primeFactorization2(N):
-    primes = defaultdict(int)
-    for p in isPrime:
+    primes = Counter()
+    for p in primeList:
         while N % p == 0:
             N //= p
             primes[p] += 1
