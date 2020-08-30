@@ -36,12 +36,33 @@ def createPrimeList(N, isTable=True):
     return isPrime if isTable else [i for i in range(2, N) if isPrime[i]]
 
 # 素因数分解(複数回)
-from collections import Counter
-primeList = createPrimeList(10**5, False)
-def primeFactorization2(N):
-    primes = Counter()
-    for p in primeList:
-        while N % p == 0:
-            N //= p
-            primes[p] += 1
-    return primes
+class Prime:
+    def __init__(self, N):
+        smallestPrime = [1] * (N + 1)
+        primes = []
+
+        for i in range(2, N + 1):
+            if smallestPrime[i] != 1:
+                continue
+            primes.append(i)
+            for p in range(i * 2, N + 1, i):
+                if smallestPrime[p] == 1:
+                    smallestPrime[p] = i
+
+        self.smallestPrime = smallestPrime
+        self.primes = primes
+
+    def isPrime(self, n):
+        return n > 1 and self.smallestPrime[n] == 1
+
+    def factorization(self, n):
+        ret = Counter()
+        while True:
+            p = self.smallestPrime[n]
+            if p == 1:
+                break
+            ret[p] += 1
+            n //= p
+        if n > 1:
+            ret[n] += 1
+        return ret
